@@ -1,0 +1,38 @@
+# Microservicio desplegado (2026-09-23 22:26:03 -05)
+$ kubectl apply -f k8s/microservicio.yaml
+namespace/dev created
+deployment.apps/podinfo created
+service/podinfo created
+
+$ kubectl get deploy,pods,svc -n dev -o wide
+NAME                             READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                               SELECTOR
+deployment.apps/load-generator   2/2     2            2           4s      load         busybox:1.36                         app=load-generator
+deployment.apps/podinfo          3/3     3            3           5m25s   podinfo      ghcr.io/stefanprodan/podinfo:6.7.1   app=podinfo
+
+NAME                                  READY   STATUS    RESTARTS   AGE   IP             NODE                              NOMINATED NODE   READINESS GATES
+pod/load-generator-787b5586d6-hwtb6   1/1     Running   0          5s    10.244.0.101   aks-default-12912847-vmss000000   <none>           <none>
+pod/load-generator-787b5586d6-x6p4h   1/1     Running   0          5s    10.244.0.60    aks-default-12912847-vmss000000   <none>           <none>
+pod/podinfo-65f46f89-hwswc            1/1     Running   0          31s   10.244.0.178   aks-default-12912847-vmss000000   <none>           <none>
+pod/podinfo-65f46f89-lkvqr            1/1     Running   0          19s   10.244.0.95    aks-default-12912847-vmss000000   <none>           <none>
+pod/podinfo-65f46f89-mnbsq            1/1     Running   0          43s   10.244.0.250   aks-default-12912847-vmss000000   <none>           <none>
+
+NAME              TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)        AGE     SELECTOR
+service/podinfo   LoadBalancer   10.0.63.233   52.224.138.212   80:31065/TCP   5m26s   app=podinfo
+
+$ curl -s http://52.224.138.212/
+{
+  "hostname": "podinfo-65f46f89-lkvqr",
+  "version": "6.7.1",
+  "revision": "6b7aab8a10d6ee8b895b0a5048f4ab0966ed29ff",
+  "color": "#34577c",
+  "logo": "https://raw.githubusercontent.com/stefanprodan/podinfo/gh-pages/cuddle_clap.gif",
+  "message": "greetings from podinfo v6.7.1",
+  "goos": "linux",
+  "goarch": "amd64",
+  "runtime": "go1.23.2",
+  "num_goroutine": "6",
+  "num_cpu": "2"
+}
+
+$ curl -s -o /dev/null -w '%{http_code}' http://52.224.138.212/status/404
+404

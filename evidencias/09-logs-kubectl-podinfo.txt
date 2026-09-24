@@ -1,0 +1,12 @@
+$ kubectl logs -n dev deploy/podinfo --tail=8
+{"level":"debug","ts":"2026-09-24T03:42:16.789Z","caller":"http/logging.go:21","msg":"request started","proto":"HTTP/1.1","uri":"/status/404","method":"GET","remote":"10.244.0.24:38608","user-agent":"Wget"}
+{"level":"debug","ts":"2026-09-24T03:42:16.800Z","caller":"http/logging.go:21","msg":"request started","proto":"HTTP/1.1","uri":"/","method":"GET","remote":"10.244.0.24:38612","user-agent":"Wget"}
+{"level":"debug","ts":"2026-09-24T03:42:16.802Z","caller":"http/logging.go:21","msg":"request started","proto":"HTTP/1.1","uri":"/","method":"GET","remote":"10.244.0.41:54092","user-agent":"Wget"}
+{"level":"debug","ts":"2026-09-24T03:42:16.803Z","caller":"http/logging.go:21","msg":"request started","proto":"HTTP/1.1","uri":"/status/404","method":"GET","remote":"10.244.0.24:38636","user-agent":"Wget"}
+{"level":"debug","ts":"2026-09-24T03:42:16.819Z","caller":"http/logging.go:21","msg":"request started","proto":"HTTP/1.1","uri":"/api/info","method":"GET","remote":"10.244.0.24:38654","user-agent":"Wget"}
+{"level":"debug","ts":"2026-09-24T03:42:16.889Z","caller":"http/logging.go:21","msg":"request started","proto":"HTTP/1.1","uri":"/","method":"GET","remote":"10.244.0.24:38780","user-agent":"Wget"}
+{"level":"debug","ts":"2026-09-24T03:42:16.890Z","caller":"http/logging.go:21","msg":"request started","proto":"HTTP/1.1","uri":"/api/info","method":"GET","remote":"10.244.0.24:38796","user-agent":"Wget"}
+{"level":"debug","ts":"2026-09-24T03:42:16.902Z","caller":"http/logging.go:21","msg":"request started","proto":"HTTP/1.1","uri":"/","method":"GET","remote":"10.244.0.24:38816","user-agent":"Wget"}
+
+$ kubectl logs -n dev deploy/podinfo --tail=300 | grep -c '/status/404'
+99

@@ -1,0 +1,18 @@
+$ kubectl get pods -n monitoring
+NAME                                             READY   STATUS    RESTARTS   AGE
+grafana-6d9b59c579-vgg9q                         1/1     Running   0          62s
+loki-0                                           1/1     Running   0          5m47s
+loki-promtail-2lx5l                              1/1     Running   0          5m47s
+prometheus-kube-state-metrics-798fb7d7b8-dj729   1/1     Running   0          5m54s
+prometheus-prometheus-node-exporter-nz4qd        1/1     Running   0          5m54s
+prometheus-server-fcf964c77-8jl7w                2/2     Running   0          5m54s
+
+$ kubectl get svc -n monitoring
+NAME                                  TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
+grafana                               LoadBalancer   10.0.113.217   20.237.52.159   80:32569/TCP   4m
+loki                                  ClusterIP      10.0.49.141    <none>          3100/TCP       5m49s
+loki-headless                         ClusterIP      None           <none>          3100/TCP       5m49s
+loki-memberlist                       ClusterIP      None           <none>          7946/TCP       5m49s
+prometheus-kube-state-metrics         ClusterIP      10.0.196.192   <none>          8080/TCP       5m56s
+prometheus-prometheus-node-exporter   ClusterIP      10.0.79.218    <none>          9100/TCP       5m56s
+prometheus-server                     ClusterIP      10.0.235.234   <none>          80/TCP         5m56s

@@ -1,0 +1,10 @@
+$ az aks list -o table
+Name                     ResourceGroup           Location    State      Power    K8s    VmSize             Nodes
+-----------------------  ----------------------  ----------  ---------  -------  -----  -----------------  -------
+aks-acuna-dev-eastus-01  rg-acuna-dev-eastus-01  eastus      Succeeded  Running  1.35   Standard_D2als_v7  1
+
+$ az group list -o table
+Name                                                      Location    State
+--------------------------------------------------------  ----------  ---------
+rg-acuna-dev-eastus-01                                    eastus      Succeeded
+MC_rg-acuna-dev-eastus-01_aks-acuna-dev-eastus-01_eastus  eastus      Succeeded

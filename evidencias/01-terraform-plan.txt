@@ -1,0 +1,8 @@
+$ terraform plan
+No changes. Your infrastructure matches the configuration.
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+
+$ terraform state list
+azurerm_kubernetes_cluster.aks_01
+azurerm_resource_group.rg_01

@@ -1,0 +1,21 @@
+# Estado ANTES de desplegar el microservicio (2026-09-23 22:19:01 -05)
+$ kubectl top nodes
+NAME                              CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+aks-default-12912847-vmss000000   130m         6%       2256Mi          80%         
+
+$ kubectl top pods -A --sort-by=memory | head -15
+NAMESPACE     NAME                                             CPU(cores)   MEMORY(bytes)   
+monitoring    prometheus-server-fcf964c77-8jl7w                2m           202Mi           
+monitoring    grafana-6d9b59c579-vgg9q                         64m          135Mi           
+kube-system   csi-azuredisk-node-r7rdn                         1m           75Mi            
+kube-system   azure-cns-bkgkj                                  1m           71Mi            
+monitoring    loki-0                                           2m           67Mi            
+monitoring    loki-promtail-2lx5l                              5m           61Mi            
+kube-system   metrics-server-7c4d5d8fdb-7kv9b                  1m           61Mi            
+kube-system   csi-azurefile-node-nrp6t                         2m           56Mi            
+kube-system   kube-proxy-ntt85                                 1m           55Mi            
+kube-system   coredns-5d474ff6db-wl9ml                         1m           51Mi            
+kube-system   metrics-server-7c4d5d8fdb-lf6ww                  2m           28Mi            
+monitoring    prometheus-kube-state-metrics-798fb7d7b8-dj729   2m           27Mi            
+kube-system   azure-ip-masq-agent-w8hc8                        1m           23Mi            
+kube-system   coredns-5d474ff6db-z4cjc                         1m           17Mi            

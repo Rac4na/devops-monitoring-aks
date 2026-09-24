@@ -1,0 +1,38 @@
+# Estado DESPUÉS de desplegar el microservicio (2026-09-23 22:42:07 -05)
+$ kubectl top nodes
+NAME                              CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+aks-default-12912847-vmss000000   796m         41%      2441Mi          87%         
+
+$ kubectl top pods -n dev
+NAME                              CPU(cores)   MEMORY(bytes)   
+load-generator-7d9dc6dcc8-24tt7   72m          0Mi             
+load-generator-7d9dc6dcc8-4k2ng   84m          1Mi             
+load-generator-7d9dc6dcc8-9h2dp   77m          0Mi             
+load-generator-7d9dc6dcc8-zfhfh   110m         0Mi             
+podinfo-65f46f89-hwswc            22m          148Mi           
+podinfo-65f46f89-lkvqr            23m          147Mi           
+podinfo-65f46f89-mnbsq            25m          156Mi           
+
+$ kubectl top pods -A --sort-by=memory | head -12
+NAMESPACE     NAME                                             CPU(cores)   MEMORY(bytes)   
+monitoring    grafana-6d9b59c579-vgg9q                         5m           171Mi           
+monitoring    prometheus-server-fcf964c77-8jl7w                3m           164Mi           
+dev           podinfo-65f46f89-mnbsq                           25m          156Mi           
+dev           podinfo-65f46f89-hwswc                           22m          148Mi           
+dev           podinfo-65f46f89-lkvqr                           23m          147Mi           
+monitoring    loki-0                                           4m           140Mi           
+kube-system   metrics-server-7c4d5d8fdb-7kv9b                  2m           107Mi           
+monitoring    loki-promtail-2lx5l                              23m          104Mi           
+kube-system   csi-azurefile-node-nrp6t                         2m           83Mi            
+kube-system   kube-proxy-ntt85                                 1m           68Mi            
+kube-system   csi-azuredisk-node-r7rdn                         1m           65Mi            
+
+$ kubectl get pods -n dev
+NAME                              READY   STATUS    RESTARTS   AGE
+load-generator-7d9dc6dcc8-24tt7   1/1     Running   0          14m
+load-generator-7d9dc6dcc8-4k2ng   1/1     Running   0          14m
+load-generator-7d9dc6dcc8-9h2dp   1/1     Running   0          14m
+load-generator-7d9dc6dcc8-zfhfh   1/1     Running   0          14m
+podinfo-65f46f89-hwswc            1/1     Running   0          16m
+podinfo-65f46f89-lkvqr            1/1     Running   0          16m
+podinfo-65f46f89-mnbsq            1/1     Running   0          16m
