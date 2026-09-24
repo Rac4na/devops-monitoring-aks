@@ -1,0 +1,40 @@
+serverFiles:
+  alerts:
+    groups:
+    - name: disk-alerts
+      rules:
+      - alert: DiskUsageHigh
+        expr: (node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"}) 
+              / node_filesystem_size_bytes{mountpoint="/"} * 100 > 21.55
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Disco alto en {{ $labels.instance }}"
+          description: "El nodo {{ $labels.instance }} superó 21.55% de uso de disco en / durante 1m."
+    - name: memory-alerts
+      rules:
+      - alert: MemoryUsageHigh
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) 
+              / node_memory_MemTotal_bytes * 100 > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Memoria alta en {{ $labels.instance }}"
+          description: "El nodo {{ $labels.instance }} superó 80% de uso de memoria durante 2m."
+
+alertmanager:
+  config:
+    global:
+      smtp_smarthost: 'smtp.gmail.com:587'
+      smtp_from: 'hansleolml@gmail.com'
+      smtp_auth_username: 'hansleolml@gmail.com'
+      smtp_auth_password: '<APP_PASSWORD_GMAIL>'   # no es tu clave normal, es un App Password
+      smtp_require_tls: true
+    route:
+      receiver: 'correo'
+    receivers:
+    - name: 'correo'
+      email_configs:
+      - to: 'josedk20@gmail.com'
